@@ -1,0 +1,248 @@
+创建版本库目录
+mkdir learngit
+
+进入版本库目录
+cd learngit
+
+查看目录
+pwd
+/Users/michael/learngit
+
+初始化版本库
+git init
+
+查看.git目录
+ls -ah
+
+在目录下新建一个readme.txt
+内容
+111111
+
+添加文件到仓库
+git add readme.txt
+
+提交到仓库 (-m 版本说明)
+git commit -m "a111111"
+
+查看变动状态
+git status
+
+查看状态有变动的内容
+git diff readme.txt
+
+查看提交版本(当前版本到之前所有版本)
+git log
+查看版本简化版
+git log --pretty=oneline
+
+回退版本 (HEAD^ 上个版本)(HEAD^^ 上上个版本)(HEAD~100 前100个版本)
+git reset --hard HEAD^
+
+查看文件
+cat readme.txt
+
+回退指定版本
+git reset --hard 00d55bdb8
+
+查看命令版本(最新版本到之前所有版本)
+git reflog
+
+工作区
+电脑能看到的目录
+
+版本库
+隐藏目录.git stage(index) 暂存区 master分支
+add 添加到暂存区
+commit 提交到当前分支
+
+撤销工作区的修改
+git checkout -- readme.txt
+
+撤销暂存区的修改
+git reset HEAD readme.txt
+
+删除文件(需要git commit)(删除了未提交可恢复git checkout -- readme.txt
+git rm readme.txt
+
+==========远程仓库==========
+----------添加远程库----------
+
+创建SSH Key (wz333@qq.com 你的邮箱)
+ssh-keygen -t rsa -C "wz333@qq.com" (一直回车)
+.ssh 
+--id_rsa 私钥
+--id_rsa.pub 公钥
+
+新建远程库公钥(公司,家等 可添加多个KEY)
+GitHub > settings > SSH Keys > Add SSH Key
+--Title : 任意
+--Key : id_rsa.pub内容
+--Add Key
+
+添加远程库
+GitHub > New repository
+--name : 任意
+--Create repository
+
+连接远程库(sagawz/Text 你的GitHub帐号,和库名)
+$ git remote add origin git@github.com:sagawz/Text.git
+如果失败提示错误信息：fatal: remote origin already exists.
+先执行 : git remote rm origin 
+再执行连接命令
+
+推送本地到远程库(origin 远程库名字)(-u 所有内容)
+git push -u origin master
+--yes(第一次验证需要确认)
+如果失败提示错误信息 : error: failed to push some refs to 'git@github.com:sagawz/Test.git'
+
+说明GitHub上有文件未在本地库中,我们需要合并到本地
+git pull --rebase origin master
+再执行推送命令
+如果失败提示错误信息 : ssh_exchange_identification: Connection closed by remote host
+请检查host是否有指向对应的GitHub 如果有请删除后重试
+
+之后本地提交后直接执行下面命令进行推送
+git push origin master
+
+
+----------远程库克隆----------
+新建仓库
+GitHub 
+--name
+--√ Initialize this repository with a README (创建README文件)
+
+
+克隆到本地库
+git clone git@github.com:michaelliao/gitskills.git
+
+
+===========分支============
+
+
+
+
+
+
+
+命令显示颜色 (--global 当前用户生效 不加的话是当前仓库生效)
+git config --global color.ui true
+
+命令缩写
+git config --global alias.st status (status 增加缩写 st)
+最后一次提交信息
+git config --global alias.last 'log -1'
+git last
+
+缩写+log颜色
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+git lg
+
+
+===========搭建服务器============
+下载 Bonobo Git Server
+https://bonobogitserver.com/
+解压并存放目录
+目录添加权限 
+--IIS_IUSRS全部
+--NETWORK_SERVICES 全部
+--系统帐号 全部
+和部署windows站点一样 添加网站 选择目录地址
+ISAPI和CGI限制
+--ASP.NET v4.0 2个允许
+应用程序池选择 .Net Framework v4.0
+配置host
+浏览器访问 默认帐号密码 : admin admin
+settings
+
+Repository Directory  (代码库的根目录,设置目录读写权限) 
+
+Respositories > Create new repository
+输入name 确认
+进入到name下 查看 Personal URL  http://admin@git.ppdai.com/QAGit.git
+
+WebDAV安装
+开始 > 管理工具 > 服务器管理器 > 角色 > Web服务器IIS > 右键添加角色服务
+勾选 WebDAV Publishing 下一步安装
+
+在iis站点中双击 WebDAV创作规则 > 添加创作规则 > 所以用户 > 确认
+
+在本地通过git工具克隆
+git clone http://admin:admin@git.ppdai.com/QAGit.git
+
+
+
+
+
+本文档参考廖雪峰网站 : http://www.liaoxuefeng.com/wiki
+
+
+===========错误问题处理============
+如果输入$ git remote add origin git@github.com:djqiang（github帐号名）/gitdemo（项目名）.git 
+    提示出错信息：fatal: remote origin already exists.
+    解决办法如下：
+    1、先输入$ git remote rm origin
+    2、再输入$ git remote add origin git@github.com:djqiang/gitdemo.git 就不会报错了！
+    3、如果输入$ git remote rm origin 还是报错的话，error: Could not remove config section 'remote.origin'. 我们需要修改gitconfig文件的内容
+    4、找到你的github的安装路径，我的是C:\Users\ASUS\AppData\Local\GitHub\PortableGit_ca477551eeb4aea0e4ae9fcd3358bd96720bb5c8\etc
+    5、找到一个名为gitconfig的文件，打开它把里面的[remote "origin"]那一行删掉就好了！
+ 
+ 
+    如果输入$ ssh -T git@github.com
+    出现错误提示：Permission denied (publickey).因为新生成的key不能加入ssh就会导致连接不上github。
+    解决办法如下：
+    1、先输入$ ssh-agent，再输入$ ssh-add ~/.ssh/id_key，这样就可以了。
+    2、如果还是不行的话，输入ssh-add ~/.ssh/id_key 命令后出现报错Could not open a connection to your authentication agent.解决方法是key用Git Gui的ssh工具生成，这样生成的时候key就直接保存在ssh中了，不需要再ssh-add命令加入了，其它的user，token等配置都用命令行来做。
+    3、最好检查一下在你复制id_rsa.pub文件的内容时有没有产生多余的空格或空行，有些编辑器会帮你添加这些的。
+ 
+ 
+    如果输入$ git push origin master
+    提示出错信息：error:failed to push som refs to .......
+    解决办法如下：
+    1、先输入$ git pull origin master //先把远程服务器github上面的文件拉下来
+    2、再输入$ git push origin master
+    3、如果出现报错 fatal: Couldn't find remote ref master或者fatal: 'origin' does not appear to be a git repository以及fatal: Could not read from remote repository.
+    4、则需要重新输入$ git remote add origingit@github.com:djqiang/gitdemo.git
+ 
+ 
+    使用git在本地创建一个项目的过程
+    $ makdir ~/hello-world    //创建一个项目hello-world
+    $ cd ~/hello-world       //打开这个项目
+    $ git init             //初始化 
+    $ touch README
+    $ git add README        //更新README文件
+    $ git commit -m 'first commit'     //提交更新，并注释信息“first commit”
+    $ git remote add origin git@github.com:defnngj/hello-world.git     //连接远程github项目  
+    $ git push -u origin master     //将本地项目更新到github项目上去
+ 
+   
+    gitconfig配置文件
+         Git有一个工具被称为git config，它允许你获得和设置配置变量；这些变量可以控制Git的外观和操作的各个方面。这些变量可以被存储在三个不同的位置： 
+         1./etc/gitconfig 文件：包含了适用于系统所有用户和所有库的值。如果你传递参数选项’--system’ 给 git config，它将明确的读和写这个文件。 
+         2.~/.gitconfig 文件 ：具体到你的用户。你可以通过传递--global 选项使Git 读或写这个特定的文件。
+         3.位于git目录的config文件 (也就是 .git/config) ：无论你当前在用的库是什么，特定指向该单一的库。每个级别重写前一个级别的值。因此，在.git/config中的值覆盖了在/etc/gitconfig中的同一个值。
+        在Windows系统中，Git在$HOME目录中查找.gitconfig文件（对大多数人来说，位于C:\Documents and Settings\$USER下）。它也会查找/etc/gitconfig，尽管它是相对于Msys 根目录的。这可能是你在Windows中运行安装程序时决定安装Git的任何地方。
+ 
+        配置相关信息：
+        2.1　当你安装Git后首先要做的事情是设置你的用户名称和e-mail地址。这是非常重要的，因为每次Git提交都会使用该信息。它被永远的嵌入到了你的提交中：
+　　$ git config --global user.name "John Doe"
+　　$ git config --global user.email johndoe@example.com
+ 
+       2.2    你的编辑器(Your Editor)
+　　现在，你的标识已经设置，你可以配置你的缺省文本编辑器，Git在需要你输入一些消息时会使用该文本编辑器。缺省情况下，Git使用你的系统的缺省编辑器，这通常可能是vi 或者 vim。如果你想使用一个不同的文本编辑器，例如Emacs，你可以做如下操作：
+　　$ git config --global core.editor emacs
+ 
+      2.3 检查你的设置(Checking Your Settings)
+　　如果你想检查你的设置，你可以使用 git config --list 命令来列出Git可以在该处找到的所有的设置:
+　　$ git config --list
+      你也可以查看Git认为的一个特定的关键字目前的值，使用如下命令 git config {key}:
+　　$ git config user.name
+ 
+      2.4 获取帮助(Getting help)
+　　如果当你在使用Git时需要帮助，有三种方法可以获得任何git命令的手册页(manpage)帮助信息:
+　　$ git help <verb>
+　　$ git <verb> --help
+　　$ man git-<verb>
+　　例如，你可以运行如下命令获取对config命令的手册页帮助:
+　　$ git help config
+
+错误处理引用dengjianqiang2011博客 : http://blog.csdn.net/dengjianqiang2011/article/details/9260435

@@ -1,0 +1,11 @@
+ios
+1 开启charles代理
+2 手机连接代理
+3 手机浏览器访问http://www.charlesproxy.com/getssl
+4 安装证书
+5 charles上点击确认
+6 charles上安装证书SSL Proxying > Install Charles Root Certificate
+7 开启ssl配置Proxy > SSL Proxying Settings > Enable SSL Proxying > Add   添加对应的htts站点 如xxx.ppdai.com:443
+
+Android
+同ios 
