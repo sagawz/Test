@@ -1,3 +1,10 @@
+***********************************
+* Charles
+* create : 2016-3-15 14:11:38
+* update : 2016-3-21 19:29:18
+* by sagawz
+***********************************
+
 charles安装
 下载
 -- http://www.charlesproxy.com/
@@ -9,6 +16,7 @@ mac
 设置代理端口
 --Proxy-> Proxy Settings-> Port : [8888]
 SSL配置
+--Proxy->SSL Proxying Settings -> SSL Proxying -> Enable SSL Proxying [勾选]
 --Proxy->SSL Proxying Settings -> SSL Proxying -> Add -> Host : [监测IP/域名]  ; Prot : [443]
 如xxx.ppdai.com:443 或者 *:443
 
@@ -26,3 +34,5 @@ charles上安装证书Help -> SSL Proxying -> Install Charles Root Certificate
 
 Android
 同ios 
+
+参考jiangwei0910410003的文档 : http://blog.csdn.net/jiangwei0910410003/article/details/41620363
