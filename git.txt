@@ -169,11 +169,82 @@ WebDAV安装
 在本地通过git工具克隆
 git clone http://admin:admin@git.ppdai.com/QAGit.git
 
-
+如果遇到问题，可以查看App_Data中的错误日志文件Bonobo.Git.Server.Errors.log
 
 
 
 本文档参考廖雪峰网站 : http://www.liaoxuefeng.com/wiki
+
+
+
+
+
+
+===========从github下载某个git库的4种方法===========
+
+以gerrit-trigger-plugin为例，下面的链接都是从相应页面上直接拷贝的。
+
+法一：不用github的账号，打开这个库在github上的主页，运行下面命令即可
+
+read only
+
+运行命令$git clone https://github.com/jenkinsci/gerrit-trigger-plugin.git
+
+
+下面的三种方法都要先在github上注册账户，然后生成相应的ssh key，并把public key添加到个人账户里面，详见github帮助
+
+
+read+write
+$git clone git@github.com:flyingbird1221/gerrit-trigger-plugin.git   
+
+read+write
+
+$git clone https://flyingbird1221@github.com/flyingbird1221/gerrit-trigger-plugin.git   
+会提示输入密码，注意此处的密码不是你在github上账户的密码，而是当前登录系统用户的密码。
+
+
+read only
+
+$git clone git://github.com/flyingbird1221/gerrit-trigger-plugin.git
+
+
+
+
+
+
+===========git之https或http方式设置记住用户名和密码的方法===========
+
+https方式每次都要输入密码，按照如下设置即可输入一次就不用再手输入密码的困扰而且又享受https带来的极速
+
+设置记住密码（默认15分钟）：
+
+git config --global credential.helper cache
+如果想自己设置时间，可以这样做：
+
+git config credential.helper 'cache --timeout=3600'
+这样就设置一个小时之后失效
+
+长期存储密码：
+
+git config --global credential.helper store
+增加远程地址的时候带上密码也是可以的。(推荐)
+
+http://yourname:password@git.oschina.net/name/project.git
+补充：使用客户端也可以存储密码的。
+
+如果你正在使用ssh而且想体验https带来的高速，那么你可以这样做： 切换到项目目录下 ：
+
+cd projectfile/
+移除远程ssh方式的仓库地址
+
+git remote rm origin
+增加https远程仓库地址
+
+git remote add origin http://yourname:password@git.oschina.net/name/project.git
+
+
+
+
 
 
 ===========错误问题处理============

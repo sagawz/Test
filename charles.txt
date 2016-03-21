@@ -1,11 +1,28 @@
-ios
-1 开启charles代理
-2 手机连接代理
-3 手机浏览器访问http://www.charlesproxy.com/getssl
-4 安装证书
-5 charles上点击确认
-6 charles上安装证书SSL Proxying > Install Charles Root Certificate
-7 开启ssl配置Proxy > SSL Proxying Settings > Enable SSL Proxying > Add   添加对应的htts站点 如xxx.ppdai.com:443
+charles安装
+下载
+-- http://www.charlesproxy.com/
+
+破解
+-- 请自行百度
+mac
+--运行charles
+设置代理端口
+--Proxy-> Proxy Settings-> Port : [8888]
+SSL配置
+--Proxy->SSL Proxying Settings -> SSL Proxying -> Add -> Host : [监测IP/域名]  ; Prot : [443]
+如xxx.ppdai.com:443 或者 *:443
+
+查看本机IP地址
+-- 系统偏好设置 -> 网络 -> Wi-Fi -> 状态
+
+ios连接代理
+-- 设置 -> 无线局域网 -> 同mac无线网相同,点击右侧感叹号 -> HTTP代理 -> 手动 -> 输入macIP地址 和 代理端口
+
+安装证书
+ios浏览器访问http://www.charlesproxy.com/getssl -> charles上点击allow确认
+charles上安装证书Help -> SSL Proxying -> Install Charles Root Certificate
+如果只监控手机可以在--Proxy-> 取消勾选 Mac OS X Proxy
+之后在手机上操作就可以了
 
 Android
 同ios 
