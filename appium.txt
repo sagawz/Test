@@ -5,32 +5,29 @@
 * by sagawz
 ***********************************
 
-����ģ����
-1. ���� http://www.genymotion.net/
-2. ע��
-3. ����
-4. ��װ
-����ģ����
+下载模拟器
+1. 访问 http://www.genymotion.net/
+2. 注册
+3. 下载
+4. 安装
+配置模拟器
 1. Genymotion -> Settings
-  1.1. ����SDK ADB Android SDK  
+  1.1. 配置SDK ADB Android SDK  
 
-����appium
+启动appium
 Android Settings
-1. Application Path�����Choose��ť��ᵯ��ѡ��AndroidӦ�õ�·��ѡ���ѡ����Ҫ���Ե�Ӧ�ü��ɡ�
-2. Launch AVD: ����ж��ģ����������ѡ��һ����Ϊ�����õ�ģ������
-3. Platform Name:�����Ȼѡ��Android����Ϊ��������˵Android���Զ������ԡ�
-4. Automation Name:��Ȼѡ��Appium
-5. PlatformVersion:�����Ȼѡ���ģ������һ���İ汾
+1. Application Path：点击Choose按钮后会弹出选择Android应用的路径选择框，选择需要测试的应用即可。
+2. Launch AVD: 如果有多个模拟器，这里选择一个作为测试用的模拟器。
+3. Platform Name:这个当然选择Android，因为现在是在说Android的自动化测试。
+4. Automation Name:当然选择Appium
+5. PlatformVersion:这个当然选择和模拟器中一样的版本
 General Settings
-������ڱ�����װ��Appium���򶼿��Ա���Ĭ��ֵ�������Appium��װ������������������Ҫ����Server Address��ֵ����Appium���ڻ�����IP��ַ���˿ں�һ��������ġ�
+如果就在本机安装了Appium，则都可以保持默认值，如果把Appium安装在了其他机器，则需要设置Server Address，值就是Appium所在机器的IP地址，端口号一般无需更改。
 
-RIDE�ű�
+RIDE脚本
 Open Application
-${REMOTE_URL}��Զ��URL��ָ����Appium���ڵĵ�ַ�Լ��˿ںţ�֮���/wd/hubΪ�̶���ʽ���벻Ҫ�Ķ���
-${PLATFORM_NAME}��ƽ̨���ƣ�������Android�н��в��ԣ�ֻ��дAndroid��
-${PLATFORM_VERSION}��ƽ̨�汾��Ҳ����Android�İ汾�ţ����Ҫ��ģ�������趨�İ汾��ͬ���ɡ�
-${DEVICE_NAME}���豸���ƣ����������е�ģ���������ƣ������֪��������ͨ����������������adb devicesָ��ȡ�á�
-${APP}��Ҫ���Ե�App��ȫ·����ע�����·��ָ���������Appium���ڵĻ�����·��
-
-
-
+${REMOTE_URL}：远程URL，指的是Appium所在的地址以及端口号，之后的/wd/hub为固定格式，请不要改动。
+${PLATFORM_NAME}：平台名称，我们在Android中进行测试，只能写Android。
+${PLATFORM_VERSION}：平台版本，也就是Android的版本号，这个要和模拟器中设定的版本相同即可。
+${DEVICE_NAME}：设备名称，就是运行中的模拟器的名称，如果不知道，可以通过在命令行中输入adb devices指令取得。
+${APP}：要测试的App的全路径，注意这个路径指的是相对于Appium所在的机器的路径

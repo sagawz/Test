@@ -5,34 +5,34 @@
 * by sagawz
 ***********************************
 
-charles°²×°
-ÏÂÔØ
+charleså®‰è£…
+ä¸‹è½½
 -- http://www.charlesproxy.com/
 
-ÆÆ½â
--- Çë×ÔĞĞ°Ù¶È
+ç ´è§£
+-- è¯·è‡ªè¡Œç™¾åº¦
 mac
---ÔËĞĞcharles
-ÉèÖÃ´úÀí¶Ë¿Ú
+--è¿è¡Œcharles
+è®¾ç½®ä»£ç†ç«¯å£
 --Proxy-> Proxy Settings-> Port : [8888]
-SSLÅäÖÃ
---Proxy->SSL Proxying Settings -> SSL Proxying -> Enable SSL Proxying [¹´Ñ¡]
---Proxy->SSL Proxying Settings -> SSL Proxying -> Add -> Host : [¼à²âIP/ÓòÃû]  ; Prot : [443]
-Èçxxx.ppdai.com:443 »òÕß *:443
+SSLé…ç½®
+--Proxy->SSL Proxying Settings -> SSL Proxying -> Enable SSL Proxying [å‹¾é€‰]
+--Proxy->SSL Proxying Settings -> SSL Proxying -> Add -> Host : [ç›‘æµ‹IP/åŸŸå]  ; Prot : [443]
+å¦‚xxx.ppdai.com:443 æˆ–è€… *:443
 
-²é¿´±¾»úIPµØÖ·
--- ÏµÍ³Æ«ºÃÉèÖÃ -> ÍøÂç -> Wi-Fi -> ×´Ì¬
+æŸ¥çœ‹æœ¬æœºIPåœ°å€
+-- ç³»ç»Ÿåå¥½è®¾ç½® -> ç½‘ç»œ -> Wi-Fi -> çŠ¶æ€
 
-iosÁ¬½Ó´úÀí
--- ÉèÖÃ -> ÎŞÏß¾ÖÓòÍø -> Í¬macÎŞÏßÍøÏàÍ¬,µã»÷ÓÒ²à¸ĞÌ¾ºÅ -> HTTP´úÀí -> ÊÖ¶¯ -> ÊäÈëmacIPµØÖ· ºÍ ´úÀí¶Ë¿Ú
+iosè¿æ¥ä»£ç†
+-- è®¾ç½® -> æ— çº¿å±€åŸŸç½‘ -> åŒmacæ— çº¿ç½‘ç›¸åŒ,ç‚¹å‡»å³ä¾§æ„Ÿå¹å· -> HTTPä»£ç† -> æ‰‹åŠ¨ -> è¾“å…¥macIPåœ°å€ å’Œ ä»£ç†ç«¯å£
 
-°²×°Ö¤Êé
-iosä¯ÀÀÆ÷·ÃÎÊhttp://www.charlesproxy.com/getssl -> charlesÉÏµã»÷allowÈ·ÈÏ
-charlesÉÏ°²×°Ö¤ÊéHelp -> SSL Proxying -> Install Charles Root Certificate
-Èç¹ûÖ»¼à¿ØÊÖ»ú¿ÉÒÔÔÚ--Proxy-> È¡Ïû¹´Ñ¡ Mac OS X Proxy
-Ö®ºóÔÚÊÖ»úÉÏ²Ù×÷¾Í¿ÉÒÔÁË
+å®‰è£…è¯ä¹¦
+iosæµè§ˆå™¨è®¿é—®http://www.charlesproxy.com/getssl -> charlesä¸Šç‚¹å‡»allowç¡®è®¤
+charlesä¸Šå®‰è£…è¯ä¹¦Help -> SSL Proxying -> Install Charles Root Certificate
+å¦‚æœåªç›‘æ§æ‰‹æœºå¯ä»¥åœ¨--Proxy-> å–æ¶ˆå‹¾é€‰ Mac OS X Proxy
+ä¹‹ååœ¨æ‰‹æœºä¸Šæ“ä½œå°±å¯ä»¥äº†
 
 Android
-Í¬ios 
+åŒios 
 
-²Î¿¼jiangwei0910410003µÄÎÄµµ : http://blog.csdn.net/jiangwei0910410003/article/details/41620363
+å‚è€ƒjiangwei0910410003çš„æ–‡æ¡£ : http://blog.csdn.net/jiangwei0910410003/article/details/41620363

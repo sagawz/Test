@@ -187,6 +187,32 @@ git clone http://admin:admin@git.ppdai.com/QAGit.git
 
 
 
+===========在CODING上托管个人静态网站============
+注意:目前GitCafe已经迁移至Coding上
+1 https://coding.net 在Coding上注册帐号
+2 创建项目
+3 项目名称随意,私有公开随意,初始化仓库勾选启动README.md,许可证选择GPL V2,选择免费版,点击创建项目
+4 进入项目后点击 Pages, 开启服务, 旁边有个分支coding-pages立即访问地址,先不用去点击,去绑定域名
+如果没有域名请按下列步骤执行
+  4.1 http://www.oray.com/ 注册帐号
+  4.2 http://domain.oray.com/ 申请域名(.cn一年38元)
+  4.3 进入管理中心-产品管理-域名管理, 点击申请的域名
+  4.4 添加域名解析, 子域名:www , 记录类型:A记录 , 线路类型:通用 , 记录值:IP地址(这里需要ping下pages.coding.me(CNAME)查看IP) , TTL:3600 , 点击添加
+5 域名绑定完成后克隆分支,先在本机创建一个文件夹来管理Coding上的项目
+6 之后在文件夹上邮件选择git bash here 输入命令 : git clone https://git.coding.net/用户名/项目名.git
+7 进入目录里创建分支 
+git checkout -b gitcafe-pages
+git push origin gitcafe-pages
+8 添加index.html, 内容随意
+通过 git add , git commit -m , git push 更新到Coding上
+9 访问 : http://用户名.coding.me/项目名, 或者访问自己的域名
+
+
+
+
+
+
+
 ===========从github下载某个git库的4种方法===========
 
 以gerrit-trigger-plugin为例，下面的链接都是从相应页面上直接拷贝的。
