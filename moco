@@ -1,0 +1,264 @@
+***********************************
+* Moco
+* create : 2016-7-18 15:37:07
+* update : 2016-7-18 15:37:13
+* by sagawz
+***********************************
+
+序 准备篇
+Java环境: JDK安装和配置
+
+一 基础篇
+创建MockServer文件夹, 将TestMockServer.jar放入文件夹中
+
+2 检查
+  CMD ---> 
+  cd 你的MockServer根目录
+  java -jar TestMockServer.jar version
+会显示0.10.3
+
+3 脚本配置
+在jar文件的同目录下创建test.json
+  脚本内容:
+[{ 
+	"response": 
+		{
+		"text":"Hello, world!"
+		} 
+}]
+  
+4 服务启动
+	CMD --->
+	java -jar TestMockServer.jar start -p 12306 -c test.json
+	--<-p 端口号>
+	--<-c 启动脚本>
+启动后会提示is started at 12306
+
+5 验证
+打开浏览器
+访问localhost:12306
+这时浏览器会显示Hello, world!
+
+6 设置域名和端口
+配置host
+127.0.0.1 test.ppdai.com
+
+修改端口号12306为80
+java -jar TestMockServer.jar start -p 80 -c test.json
+访问test.ppdai.com 浏览器返回Hello, world!
+
+二 进阶篇
+1 带参数请求
+如果我要访问test.ppdai.com/home?pages=5
+脚本配置如下:
+[{
+  "request":{
+	    "method":"get",
+        "uri":"/home",
+	    "queries":{"pages":"5"}
+    },
+  "response":{"text":"ok"}
+}]
+method是请求类型,我们这次是GET请求
+多个请求参数就逗号分隔
+
+2 headers cookies status
+[{
+  "request":{
+	    "method":"get",
+		{"headers":{
+			"content-type":"application/json"
+			},
+        "uri":"/home",
+	    "queries":{"pages":"5"}
+    },
+  "response":{
+			"headers":{
+				"content-type":"application/json"
+				},
+			"cookies":{
+				"userid":"id123456"
+			},
+			"status":200,
+			"text":"ok"}
+}]
+headers定义了返回时类型为json
+status返回状态码为200
+cookies返回了设置的cookie内容
+
+2 正则表达式
+如果我要访问test.ppdai.com/v1/home?pages=5
+我的请求域名一样,我的home首页一样,但有多个版本v1,v2,v3
+我希望test.ppdai.com/???/home?pages=5返回结果相同
+脚本配置如下:
+[{
+  "request":{
+	    "method":"get",
+        "uri":"/\\w*/home",
+	    "queries":{"pages":"5"}
+    },
+  "response":{"text":"ok"}
+}]
+
+3 页面跳转
+如果我访问的接口需要跳转到其他页面
+脚本配置如下:
+[{
+  "request":{
+	    "method":"get",
+        "uri":"/\\w*/home",
+	    "queries":{"/redirect":"go"}
+    },
+  "redirectTo":"http://www.ppdai.com"
+}]
+
+====================== OR ======================
+
+[{
+  "request":{
+	    "method":"get",
+        "uri":"/\\w*/home",
+	    "queries":{"/redirect":"go"}
+    },
+  "response":{"url":"http://www.ppdai.com"}
+}]
+
+启动浏览器访问 http://test.ppdai.com/v3/home?redirect=go
+页面将会被自动导向到 http://www.ppdai.com
+
+4 json返回
+脚本配置如下:
+[{
+  "request":{
+	"method":"get",
+    "uri":"/home",
+	"queries":{"pages":"5","all":"10"}
+    },
+  "response":{
+	    "headers":{"content-type":"application/json"},
+		"status":200,
+		"json":{"content":null,"code":"3","message":"ok"}
+  }
+}]
+json 具体返回时的json串
+
+
+
+三 转职篇
+1 Asynchronous 异步
+脚本配置如下:
+[{
+    "request":{
+        "uri":"/home"
+    },
+    "response":{
+        "text":"ok"
+    },
+    "on": {
+        "complete":{
+            "async":"true",
+            "post":{
+                "url":"http://home.ppdai.com",
+                "content":"content"
+            }
+        }
+    }
+}]
+对于/home的访问，将会是异步。
+也就是说数据并不会立即返回，而是要等到对 http://home.ppdai.com 访问结束后，才会将结果放到 Response 里。
+
+2 template 模板
+[{
+    "request":{
+        "uri":"/home"
+        },
+    "response":{
+          "text":{
+             "template":"${req.queries['name']}"
+                 }
+        }
+}]
+这样，但当我们的请求是http://www.ppdai.com/home?name=test,那么返回的数据是 test
+
+3 latency 延迟
+[{
+  "request":{"text":"latency"},
+  "response":{
+		"latency":{
+			"duration":1,
+			"unit":"second"
+        },
+		"text":"Hello, world!"
+    }
+}]
+Hello, world!将会等待5秒后返回结果
+
+
+4 全局配置脚本
+如果我有两个脚本get和post,同时加载多个json
+全局脚本配置如下:
+allhome.json定义:
+[{"include":"get.json"},{"include":"post.json"}]
+
+get.json和post.json中分别定义:
+//get
+[{
+  "request":{
+	"method":"get",
+    "uri":"/gethome",
+	"queries":{"pages":"5","all":"10"}
+    },
+  "response":{
+	    "headers":{"content-type":"application/json"},
+		"status":200,
+		"json":{"content":null,"code":"3","message":"get ok"}
+  }
+}]
+//post
+[{
+  "request":{
+	"method":"post",
+    "uri":"/posthome",
+	"queries":{"pages":"5","all":"10"}
+    },
+  "response":{
+	    "headers":{"content-type":"application/json"},
+		"status":200,
+		"json":{"content":null,"code":"3","message":"post ok"}
+  }
+}]
+
+====================== OR ======================
+allhome.json定义
+[{"context":"/gethome","include":"get.json"},{"context":"/posthome","include":"post.json"}]
+
+get.json和post.json中分别定义:
+//get
+[{
+  "request":{
+	"method":"get",
+	"queries":{"pages":"5","all":"10"}
+    },
+  "response":{
+	    "headers":{"content-type":"application/json"},
+		"status":200,
+		"json":{"content":null,"code":"3","message":"get ok"}
+  }
+}]
+//post
+[{
+  "request":{
+	"method":"post",
+	"queries":{"pages":"5","all":"10"}
+    },
+  "response":{
+	    "headers":{"content-type":"application/json"},
+		"status":200,
+		"json":{"content":null,"code":"3","message":"post ok"}
+  }
+}]
+
+CMD--->
+	java -jar TestMockServer.jar start -p 80 -g allhome.json
+注意, 此时需要通过参数-g在加载全局配置文件, 否则配置文件解析会报错
+启动成功后, 我们分别通过http://localhost/gethome 和 http://localhost/posthome 访问服务, 便可得到对应的reponse结果
